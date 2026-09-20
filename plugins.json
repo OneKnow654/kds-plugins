@@ -5,6 +5,20 @@
             "type": "file",
             "version": "1.0.0",
             "description": "Demo version of plugin greet"
+        },
+        {
+            "name": "image",
+            "version": "0.1.0",
+            "description": "Convert, compress, resize, and optimize images with WebP, AVIF, and ICO support",
+            "type": "folder",
+            "files": [
+                "image/index.js",
+                "image/package.json",
+                "image/commands/image.js",
+                "image/helpers/image.js",
+                "image/helpers/config.js",
+                "image/helpers/help.js"
+            ]
         }
     ]
 }

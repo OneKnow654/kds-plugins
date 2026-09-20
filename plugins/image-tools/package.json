@@ -1,0 +1,11 @@
+{
+    "name": "kds-plugin-image",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "main": "index.js",
+    "dependencies": {
+        "sharp": "^0.35.4",
+        "sharp-ico": "^0.1.5"
+    }
+}
