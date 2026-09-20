@@ -1,0 +1,10 @@
+{
+    "plugins": [
+        {
+            "name": "greet",
+            "type": "file",
+            "version": "1.0.0",
+            "description": "Demo version of plugin greet"
+        }
+    ]
+}
