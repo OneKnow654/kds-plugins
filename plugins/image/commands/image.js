@@ -20,6 +20,35 @@ import {
     convertImage,
 } from "../helpers/image.js";
 
+const KEY_VALUE_FLAGS = new Set(["format", "quality", "width", "height", "output"]);
+
+function parseKeyValueFlag(flag, nextValue) {
+    if (flag.includes("=")) {
+        const [keyWithDashes, ...valueParts] = flag.split("=");
+        const key = keyWithDashes.replace(/^--/, "");
+        const value = valueParts.join("=");
+
+        if (KEY_VALUE_FLAGS.has(key)) {
+            if (!value) {
+                throw new Error(`${keyWithDashes} requires a value.`);
+            }
+            return { key, value, consumedNext: false };
+        }
+    }
+
+    if (flag.startsWith("--")) {
+        const key = flag.slice(2);
+        if (KEY_VALUE_FLAGS.has(key)) {
+            if (nextValue === undefined || nextValue.startsWith("--")) {
+                throw new Error(`${flag} requires a value.`);
+            }
+            return { key, value: nextValue, consumedNext: true };
+        }
+    }
+
+    return null;
+}
+
 function normalizeFlags(flags = []) {
     const result = {};
 
@@ -36,58 +65,17 @@ function normalizeFlags(flags = []) {
             continue;
         }
 
-        if (flag === "--help") {
+        if (flag === "--help" || flag === "-h") {
             result.help = true;
             continue;
         }
 
-        if (
-            flag === "--format" ||
-            flag === "--quality" ||
-            flag === "--width" ||
-            flag === "--height" ||
-            flag === "--output"
-        ) {
-            const value = flags[index + 1];
-
-            if (
-                value === undefined ||
-                value.startsWith("--")
-            ) {
-                throw new Error(
-                    `${flag} requires a value.`
-                );
+        const parsed = parseKeyValueFlag(flag, flags[index + 1]);
+        if (parsed) {
+            result[parsed.key] = parsed.value;
+            if (parsed.consumedNext) {
+                index += 1;
             }
-
-            const key = flag.slice(2);
-
-            result[key] = value;
-            index += 1;
-            continue;
-        }
-
-        if (flag.startsWith("--format=")) {
-            result.format = flag.split("=")[1];
-            continue;
-        }
-
-        if (flag.startsWith("--quality=")) {
-            result.quality = flag.split("=")[1];
-            continue;
-        }
-
-        if (flag.startsWith("--width=")) {
-            result.width = flag.split("=")[1];
-            continue;
-        }
-
-        if (flag.startsWith("--height=")) {
-            result.height = flag.split("=")[1];
-            continue;
-        }
-
-        if (flag.startsWith("--output=")) {
-            result.output = flag.split("=")[1];
             continue;
         }
 
