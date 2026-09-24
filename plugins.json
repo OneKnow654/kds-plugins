@@ -19,6 +19,25 @@
                 "image/helpers/config.js",
                 "image/helpers/help.js"
             ]
+        },
+        {
+            "name": "image-ui",
+            "version": "0.1.0",
+            "description": "Interactive Web Studio UI dashboard for visual image conversion, real-time quality comparison, and workspace scanning",
+            "type": "folder",
+            "files": [
+                "image-ui/index.js",
+                "image-ui/package.json",
+                "image-ui/README.md",
+                "image-ui/commands/image-ui.js",
+                "image-ui/helpers/image.js",
+                "image-ui/helpers/config.js",
+                "image-ui/server/app.js",
+                "image-ui/server/static/index.html",
+                "image-ui/server/static/style.css",
+                "image-ui/server/static/app.js",
+                "image-ui/test.js"
+            ]
         }
     ]
 }
