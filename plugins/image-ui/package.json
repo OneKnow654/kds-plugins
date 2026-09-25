@@ -1,0 +1,16 @@
+{
+  "name": "kds-plugin-image-ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "description": "Interactive Web UI plugin on top of KDS Image CLI for visual conversion, compression, and image optimization",
+  "scripts": {
+    "start": "node test.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4",
+    "sharp-ico": "^0.1.5"
+  }
+}

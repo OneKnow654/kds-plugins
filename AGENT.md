@@ -1272,6 +1272,41 @@ kds create store User
 
 ---
 
+ # 38\. Official Registered Plugins & Installation
+
+ The repository `kds-plugins` maintains official KDS plugins available via the online registry:
+
+ ### Available Plugins
+ 1. **`greet`** (`type: "file"`)
+    - Description: Demo greet command (`kds greet`)
+    - Installation: `kds plugin install greet`
+
+ 2. **`image`** (`type: "folder"`)
+    - Description: Image processing CLI (`kds image convert`, `kds image compress`)
+    - Installation: `kds plugin install image`
+
+ 3. **`image-ui`** (`type: "folder"`)
+    - Description: Visual Web Studio dashboard (`kds image-ui`, `kds iui`, `kds img-ui`)
+    - Installation: `kds plugin install image-ui`
+    - Options: `--port=4500`, `--no-open`
+
+ ### Agent Verification Workflow for `image-ui`:
+ ```bash
+ # 1. Discover online registry plugins
+ kds plugin list --online
+
+ # 2. Install image-ui plugin (automatically fetches 10 files and runs npm install)
+ kds plugin install image-ui
+
+ # 3. Verify loaded active plugins
+ kds plugin list
+
+ # 4. Test Web UI dashboard server launch
+ kds image-ui --no-open
+ ```
+
+---
+
  # FINAL INSTRUCTION
 
  Treat this document as a **persistent development contract for KDS CLI plugin development**.
